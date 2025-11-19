@@ -30,11 +30,23 @@ export function ImportDialog({ onImportComplete }: ImportDialogProps) {
       const worksheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(worksheet) as any[];
 
+      // Debug: mostrar las columnas encontradas en la consola
+      if (jsonData.length > 0) {
+        console.log('Columnas encontradas en el Excel:', Object.keys(jsonData[0]));
+      }
+
       // Map and validate data
       const products: Product[] = jsonData.map((row) => ({
-        codigo: String(row.codigo || row.Codigo || row.CODIGO || '').trim(),
-        descripcion: String(row.descripcion || row.Descripcion || row.DESCRIPCION || '').trim(),
-        ubicacion: String(row.ubicacion || row.Ubicacion || row.UBICACION || '').trim(),
+        codigo: String(row.codigo || row.Codigo || row.CODIGO || row.Código || row.CÓDIGO || '').trim(),
+        descripcion: String(row.descripcion || row.Descripcion || row.DESCRIPCION || row.Descripción || row.DESCRIPCIÓN || '').trim(),
+        ubicacion: String(
+          row.ubicacion || row.Ubicacion || row.UBICACION || 
+          row.ubicación || row.Ubicación || row.UBICACIÓN ||
+          row.deposito || row.Deposito || row.DEPOSITO ||
+          row.depósito || row.Depósito || row.DEPÓSITO ||
+          row.ubic || row.Ubic || row.UBIC ||
+          ''
+        ).trim(),
         stock: Number(row.stock || row.Stock || row.STOCK || 0),
       })).filter(p => p.codigo && p.descripcion); // Filter out invalid entries
 
