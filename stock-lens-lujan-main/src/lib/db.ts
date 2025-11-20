@@ -1,5 +1,7 @@
 import { openDB, DBSchema, IDBPDatabase } from 'idb';
 import { Product } from '@/types/product';
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../firebase";
 
 interface StockDB extends DBSchema {
   products: {
@@ -50,24 +52,45 @@ export async function searchProducts(
   searchCodigo: string,
   searchDescripcion: string
 ): Promise<Product[]> {
-  const db = await getDB();
-  const allProducts = await db.getAll(STORE_NAME);
+  // Referencia a la colección 'articulos'
+  const articulosRef = collection(db, "articulos");
 
-  if (!searchCodigo && !searchDescripcion) {
-    return allProducts;
+  try {
+    let q;
+    
+    // Si hay código, buscar por código exacto
+    if (searchCodigo) {
+      q = query(articulosRef, where("codigo", "==", searchCodigo));
+    } 
+    // Si solo hay descripción, buscar por descripción (exacta)
+    else if (searchDescripcion) {
+      q = query(articulosRef, where("descripcion", "==", searchDescripcion));
+    }
+    // Si no hay búsqueda, obtener todos
+    else {
+      q = query(articulosRef);
+    }
+
+    const querySnapshot = await getDocs(q);
+    const resultados: Product[] = [];
+    
+    querySnapshot.forEach((doc) => {
+      // Guardamos los datos de cada documento encontrado
+      resultados.push(doc.data() as Product);
+    });
+
+    // Filtrar por descripción si se proporcionó (búsqueda parcial en el cliente)
+    if (searchDescripcion && searchCodigo) {
+      return resultados.filter((product) =>
+        product.descripcion?.toLowerCase().includes(searchDescripcion.toLowerCase())
+      );
+    }
+
+    return resultados;
+  } catch (error) {
+    console.error("Error buscando documentos: ", error);
+    return [];
   }
-
-  return allProducts.filter((product) => {
-    const codigoMatch = searchCodigo
-      ? product.codigo.toLowerCase().includes(searchCodigo.toLowerCase())
-      : true;
-
-    const descripcionMatch = searchDescripcion
-      ? product.descripcion.toLowerCase().includes(searchDescripcion.toLowerCase())
-      : true;
-
-    return codigoMatch && descripcionMatch;
-  });
 }
 
 export async function getProductCount(): Promise<number> {
