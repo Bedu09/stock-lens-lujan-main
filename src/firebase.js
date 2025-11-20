@@ -1,12 +1,10 @@
-// src/firebase.js
-
 import { initializeApp } from "firebase/app";
 
 import { getFirestore } from "firebase/firestore";
 
 
 
-// Tu configuración de Firebase (Cópiala de la consola de Firebase: Project Settings > General)
+// Configuración usando las variables de entorno que pusiste en Vercel
 
 const firebaseConfig = {
 
@@ -16,22 +14,24 @@ const firebaseConfig = {
 
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
 
-  storageBucket: "...", // Opcional para este paso
+  // Estos valores no son secretos, los tomé de tu captura de pantalla
 
-  messagingSenderId: "...", // Opcional
+  storageBucket: "mlujanstock-db.firebasestorage.app",
 
-  appId: "..." // Opcional
+  messagingSenderId: "307363863583",
+
+  appId: "1:307363863583:web:7fd897d0c8f8536459492a"
 
 };
 
 
 
-// Inicializar Firebase
+// Inicializar la App de Firebase
 
 const app = initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
 
 
+// Exportar la base de datos para usarla en el resto de la app
 
-export { db };
+export const db = getFirestore(app);
