@@ -1,73 +1,78 @@
-# Welcome to your Lovable project
+# StockMLuján - Sistema de Gestión de Inventario
 
-## Project info
+Sistema de gestión de inventario desarrollado para almacén con búsqueda rápida de productos por código y descripción.
 
-**URL**: https://lovable.dev/projects/273b47dd-7b21-4b61-b4e5-2c848a5d86e0
+## Características
 
-## How can I edit this code?
+- Gestión completa de inventario
+- Búsqueda rápida de productos por código y descripción
+- Interfaz moderna y responsiva
+- Optimizado para uso en almacén
 
-There are several ways of editing your application.
+## Tecnologías Utilizadas
 
-**Use Lovable**
+Este proyecto está construido con:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/273b47dd-7b21-4b61-b4e5-2c848a5d86e0) and start prompting.
+- **Vite** - Build tool y servidor de desarrollo
+- **TypeScript** - Tipado estático
+- **React** - Biblioteca de UI
+- **shadcn-ui** - Componentes de UI
+- **Tailwind CSS** - Framework de estilos
+- **React Router** - Enrutamiento
+- **TanStack Query** - Gestión de estado del servidor
+- **React Hook Form** - Manejo de formularios
+- **Zod** - Validación de esquemas
 
-Changes made via Lovable will be committed automatically to this repo.
+## Requisitos Previos
 
-**Use your preferred IDE**
+- Node.js (versión 18 o superior)
+- npm o yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Instalación
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. Clona el repositorio:
+```sh
+git clone <URL_DEL_REPOSITORIO>
+```
 
-Follow these steps:
+2. Navega al directorio del proyecto:
+```sh
+cd stock-lens-lujan-main
+```
+
+3. Instala las dependencias:
+```sh
+npm install
+```
+
+## Desarrollo
+
+Inicia el servidor de desarrollo:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+La aplicación estará disponible en `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Scripts Disponibles
 
-**Use GitHub Codespaces**
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Construye la aplicación para producción
+- `npm run build:dev` - Construye la aplicación en modo desarrollo
+- `npm run lint` - Ejecuta el linter
+- `npm run preview` - Previsualiza la build de producción
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Estructura del Proyecto
 
-## What technologies are used for this project?
+```
+stock-lens-lujan-main/
+├── src/           # Código fuente
+├── public/        # Archivos estáticos
+├── index.html     # Punto de entrada HTML
+└── package.json   # Dependencias y scripts
+```
 
-This project is built with:
+## Licencia
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/273b47dd-7b21-4b61-b4e5-2c848a5d86e0) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Este proyecto es privado y de uso interno.
